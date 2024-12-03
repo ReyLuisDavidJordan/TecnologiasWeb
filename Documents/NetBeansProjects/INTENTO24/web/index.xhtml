@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Página Principal</title>
+       
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f4f9;
+                color: #333;
+                text-align: center;
+            }
+            header {
+                background-color: #007BFF;
+                color: #fff;
+                padding: 20px 0;
+            }
+            header h1 {
+                margin: 0;
+                font-size: 2em;
+            }
+            main {
+                margin: 20px auto;
+                max-width: 600px;
+                padding: 20px;
+                background: #fff;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+            }
+            a {
+                display: inline-block;
+                margin: 20px 0; /* Separación entre botones */
+                padding: 10px 20px;
+                text-decoration: none;
+                color: #fff;
+                background-color: #007BFF;
+                border-radius: 5px;
+                transition: background-color 0.3s ease;
+            }
+            a:hover {
+                background-color: #0056b3;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <header>
+            <h1>Bienvenido a la Aplicación</h1>
+        </header>
+        <main>
+            <p>Seleccione una de las siguientes opciones:</p>
+            <h:link outcome="/departamento/List" value="Mostrar Todos los Departamentos" />
+            <br />
+            <h:link outcome="/empleado/List" value="Mostrar Todos los Empleados" />
+        </main>
+    </h:body>
+</html>

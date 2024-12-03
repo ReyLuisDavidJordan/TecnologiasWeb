@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/template.xhtml">
+    <ui:define name="title">
+        <h:outputText value="#{bundle.ListDepartamentoTitle}" />
+    </ui:define>
+    <ui:define name="body">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f9f9f9;
+                margin: 0;
+                padding: 0;
+            }
+            .form-container {
+                margin: 20px auto;
+                max-width: 900px;
+                padding: 20px;
+                background: #fff;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            h1 {
+                text-align: center;
+                color: #333;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 20px 0;
+            }
+            table th, table td {
+                padding: 10px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+            table th {
+                background-color: #007bff;
+                color: #fff;
+                text-align: center;
+            }
+            .message-panel {
+                margin-bottom: 15px;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                background-color: #f1f1f1;
+            }
+            .action-links a {
+                margin-right: 10px;
+                text-decoration: none;
+                color: #007bff;
+                font-weight: bold;
+            }
+            .action-links a:hover {
+                text-decoration: underline;
+            }
+            .btn-create {
+                display: inline-block;
+                padding: 10px 15px;
+                background-color: #28a745;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+                margin-top: 10px;
+            }
+            .btn-create:hover {
+                background-color: #218838;
+            }
+        </style>
+
+        <div class="form-container">
+            <h1>Gestión de Departamentos</h1>
+            <h:form styleClass="jsfcrud_list_form">
+                <!-- Panel de mensajes -->
+                <div id="messagePanel" class="message-panel">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table" />
+                </div>
+
+                <!-- Mensaje cuando no hay datos -->
+                <h:outputText escape="false" value="#{bundle.ListDepartamentoEmpty}" rendered="#{departamentoController.items.rowCount == 0}" />
+
+                <!-- Tabla de datos -->
+                <h:panelGroup rendered="#{departamentoController.items.rowCount > 0}">
+                    <p>Página: #{departamentoController.pagination.pageFirstItem + 1}..#{departamentoController.pagination.pageLastItem + 1}/#{departamentoController.pagination.itemsCount}</p>
+                    <div class="action-links">
+                        <h:commandLink action="#{departamentoController.previous}" value="Anterior #{departamentoController.pagination.pageSize}" rendered="#{departamentoController.pagination.hasPreviousPage}" />
+                        <h:commandLink action="#{departamentoController.next}" value="Siguiente #{departamentoController.pagination.pageSize}" rendered="#{departamentoController.pagination.hasNextPage}" />
+                    </div>
+
+                    <h:dataTable value="#{departamentoController.items}" var="item" style="width: 100%;">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDepartamentoTitle_idDep}" />
+                            </f:facet>
+                            <h:outputText value="#{item.idDep}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDepartamentoTitle_nombre}" />
+                            </f:facet>
+                            <h:outputText value="#{item.nombre}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Acciones" />
+                            </f:facet>
+                            <h:commandLink action="#{departamentoController.prepareView}" value="Ver" />
+                            <h:outputText value=" | " />
+                            <h:commandLink action="#{departamentoController.prepareEdit}" value="Editar" />
+                            <h:outputText value=" | " />
+                            <h:commandLink action="#{departamentoController.destroy}" value="Eliminar" />
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+
+                <!-- Crear nuevo registro -->
+                <br />
+                <h:commandLink action="#{departamentoController.prepareCreate}" value="Crear nuevo departamento" styleClass="btn-create" />
+                <br />
+                <h:link outcome="/index" value="Volver al inicio" />
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+
+</html>
